@@ -1,0 +1,43 @@
+version: '3.9'
+services:
+    node0:
+        image: blockchain-node:latest
+        build: ./
+        ports:
+            - "3000:4000"
+    node1:
+        image: blockchain-node:latest
+        ports:
+            - "3001:4000"
+    node2:
+        image: blockchain-node:latest
+        ports:
+            - "3002:4000"
+    node3:
+        image: blockchain-node:latest
+        ports:
+            - "3003:4000"
+    node4:
+        image: blockchain-node:latest
+        ports:
+            - "3004:4000"
+    node5:
+        image: blockchain-node:latest
+        ports:
+            - "3005:4000"
+    # node6:
+    #     image: blockchain-node:latest
+    #     ports:
+    #         - "3006:4000"
+    # node7:
+    #     image: blockchain-node:latest
+    #     ports:
+    #         - "3007:4000"
+    # node8:
+        # image: blockchain-node:latest
+        # ports:
+            # - "3008:4000"
+    # node9:
+        # image: blockchain-node:latest
+        # ports:
+            # - "3009:4000"

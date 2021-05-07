@@ -15,7 +15,7 @@ const constants = {
 		PONG_MESSAGE: "PONG !"
 	},
 	HTTP: {
-		LISTEN_PORT: process.env.HTTP_PORT || 4000,
+		LISTEN_PORT: 4000,
 		FETCH_TIMEOUT: 5000,
 		HEADERS: {'Content-Type': 'application/json'},
 		BLOCK_ROOT_ROUTES: '/block',

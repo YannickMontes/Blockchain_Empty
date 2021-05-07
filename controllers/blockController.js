@@ -36,3 +36,7 @@ function refuseBlock(req, res)
 	//On supprime le block de la liste d'attente
 	res.status(200).json({status:'success'});
 }
+
+module.exports = {acceptBlock:acceptBlock,
+					refuseBlock: refuseBlock,
+					checkBlock:checkBlock}

@@ -9,22 +9,22 @@ services:
         image: blockchain-node:latest
         ports:
             - "3001:4000"
-    node2:
-        image: blockchain-node:latest
-        ports:
-            - "3002:4000"
-    node3:
-        image: blockchain-node:latest
-        ports:
-            - "3003:4000"
-    node4:
-        image: blockchain-node:latest
-        ports:
-            - "3004:4000"
-    node5:
-        image: blockchain-node:latest
-        ports:
-            - "3005:4000"
+    # node2:
+    #     image: blockchain-node:latest
+    #     ports:
+    #         - "3002:4000"
+    # node3:
+    #     image: blockchain-node:latest
+    #     ports:
+    #         - "3003:4000"
+    # node4:
+    #     image: blockchain-node:latest
+    #     ports:
+    #         - "3004:4000"
+    # node5:
+    #     image: blockchain-node:latest
+    #     ports:
+    #         - "3005:4000"
     # node6:
     #     image: blockchain-node:latest
     #     ports:

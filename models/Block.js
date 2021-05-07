@@ -2,25 +2,66 @@ const cryptoJS = require("crypto-js");
 
 class Block
 {
-	/*
-	Un noeud peut ressembler à ça
-	Le hash d'un noeud, pour être validé par le réseau, doit être divisble par 7. 
-		{
-			"index":1,
-			"data":{
-				"sender_id":"f829932beefe",
-				"receiver_id":"dc97d7102ad7",
-				"message":"Chocolatine n'est pas un mot"
-			}
-			"previous_hash":"6acbed0b530bf4ab0236dbf62b4cc8a8d1780d9f6571e6db16b0455baf9a2bd3",
-			"timeStamp":1620076673237,
-			"nonce":4,
-			"hash":"ab0e99574c1c00c25bc5a1918538cc0cf23d185c03035ebd0d27135fa894f2eb"
-		}
-	*/
+	constructor(newIndex, oldHash, sender, receiver, msg)
+	{
+		this.index = newIndex;
+		this.data = {sender_id: sender, receiver_id: receiver, message: msg}
+		this.previous_hash = oldHash;
+		this.timeStamp = new Date().getTime();
+		this.nonce = -1;
+		this.mineHash();
+	}
+
+	initFromJSON(blockJson)
+	{
+		this.index = blockJson.index;
+		this.previous_hash = blockJson.previous_hash;
+		this.timeStamp = blockJson.timeStamp;
+		this.nonce = blockJson.nonce;
+		this.hash = blockJson.hash;
+		this.data = {sender_id:  blockJson.data.sender_id, receiver_id: blockJson.data.receiver_id, message: blockJson.data.message};
+	}
+
+	mineHash()
+	{
+		this.nonce++;
+		let toHash = this.timeStamp + this.index + this.previous_hash + JSON.stringify(this.data) + this.nonce;
+		this.hash = cryptoJS.SHA256(toHash).toString();
+	}
+
+	displayBlock()
+	{
+		console.log('index: ' + this.index);
+		console.log('timeStamp: ' + this.timeStamp);
+		console.log('previous_hash: ' + this.previous_hash);
+		console.log('hash: ' + this.hash);
+		console.log('nonce: ' + this.nonce);
+		console.log('sender_id: ' + this.data.sender_id);
+		console.log('receiver_id: ' + this.data.receiver_id);
+		console.log('message: ' + this.data.message);
+	}
 
 	proofOfWork()
 	{
 		return (parseInt(this.hash, 16)%7 == 0);
 	}
+
+	toJson()
+	{
+		let blockToJson = {
+			index: this.index,
+			timeStamp: this.timeStamp,
+			previous_hash: this.previous_hash,
+			hash: this.hash,
+			nonce: this.nonce,
+			data:{
+				sender_id: this.data.sender_id,
+				receiver_id: this.data.receiver_id,
+				message: this.data.message
+			}
+		};
+		return blockToJson;
+	}
 };
+
+module.exports = Block;
